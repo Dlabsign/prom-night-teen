@@ -110,7 +110,7 @@ export default function Hero() {
             </motion.div>
             {/* ------------------------------------------- */}
 
-         
+
             {/* Ambient glow blobs */}
             <div
                 style={{
@@ -167,7 +167,7 @@ export default function Hero() {
                         marginBottom: "-3rem", // Memberi jarak dengan H1
                     }}
                 >
-                    ✦ A Night to Celebrate ✦
+                    ✦ <br /> A Night to Celebrate <br/>✦
                 </motion.p>
 
                 {/* Main title dengan Shimmer Variant */}
@@ -202,7 +202,7 @@ export default function Hero() {
                         display: "flex",
                         justifyContent: "center",
                         marginTop: "8px",
-                        
+
                     }}
                 >
                     <span
@@ -236,7 +236,7 @@ export default function Hero() {
                         fontStyle: "italic",
                         fontWeight: 300,
                         fontSize: "clamp(1rem, 4vw, 1.125rem)",
-                        
+
                         lineHeight: 1.6,
                     }}
                 >
