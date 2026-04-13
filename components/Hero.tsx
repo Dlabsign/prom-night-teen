@@ -221,7 +221,7 @@ export default function Hero() {
                             fontSize: "clamp(0.7rem, 2vw, 0.875rem)",
                         }}
                     >
-                        Only For Class of 2026
+                        Class of 2026
                     </span>
                 </motion.div>
 
