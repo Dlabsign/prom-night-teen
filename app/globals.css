@@ -1,26 +1,167 @@
-@import "tailwindcss";
+/* app/globals.css */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Mexican Coco palette */
+  --color-bg: #0A0A0F;
+  --color-surface: #141420;
+  --color-surface-2: #1A1A2E;
+  --color-orange: #FF6B1A;
+  --color-yellow: #FFD700;
+  --color-magenta: #FF3CAC;
+  --color-purple: #9B5DE5;
+  --color-teal: #00E5FF;
+  --color-green: #00A86B;
+  --color-white: #FAFAFA;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html, body {
+  background: var(--color-bg);
+  color: var(--color-white);
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.font-serif {
+  font-family: 'Playfair Display', serif;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Glow utilities */
+.glow-orange { filter: drop-shadow(0 0 12px rgba(255,107,26,0.6)); }
+.glow-yellow { filter: drop-shadow(0 0 12px rgba(255,215,0,0.6)); }
+.glow-magenta { filter: drop-shadow(0 0 12px rgba(255,60,172,0.6)); }
+.glow-purple { filter: drop-shadow(0 0 12px rgba(155,93,229,0.6)); }
+.glow-teal { filter: drop-shadow(0 0 12px rgba(0,229,255,0.6)); }
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #0A0A0F; }
+::-webkit-scrollbar-thumb { background: rgba(255,107,26,0.3); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,107,26,0.5); }
+
+
+/* =========================================
+   DATE CARD STYLES
+   ========================================= */
+.card-date {
+  background: linear-gradient(145deg, #141420 0%, #1A1A2E 100%);
+  border: 1px solid rgba(255, 107, 26, 0.2);
+  box-shadow: 0 0 0 1px rgba(255, 107, 26, 0.05), 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
+
+.card-date-top-glow {
+  background: linear-gradient(to right, transparent, #FF6B1A, #FFD700, #FF3CAC, transparent);
+  opacity: 0.6;
+}
+
+.card-date-bottom-glow {
+  background: linear-gradient(to right, transparent, #9B5DE5, #00E5FF, #9B5DE5, transparent);
+  opacity: 0.4;
+}
+
+.card-date-circle-tl {
+  background: radial-gradient(circle, rgba(255, 107, 26, 0.12) 0%, transparent 70%);
+}
+
+.card-date-circle-br {
+  background: radial-gradient(circle, rgba(155, 93, 229, 0.1) 0%, transparent 70%);
+}
+
+.icon-container-calendar {
+  background: rgba(255, 107, 26, 0.1);
+  border: 1px solid rgba(255, 107, 26, 0.3);
+  box-shadow: 0 0 20px rgba(255, 107, 26, 0.2);
+  margin-top: 20px;
+  margin-bottom: 20px; /* Menyesuaikan mb- yang terpotong di kode asli */
+}
+
+.icon-calendar {
+  color: #FF6B1A;
+}
+
+.text-title-date {
+  font-family: 'Playfair Display', serif;
+  background: linear-gradient(90deg, #FFD700, #FF6B1A);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 8px rgba(255, 165, 0, 0.3));
+}
+
+.text-date {
+  color: rgba(255, 255, 255, 0.92);
+  font-family: 'Poppins', sans-serif;
+}
+
+.text-time {
+  color: rgba(255, 255, 255, 0.35);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+}
+
+/* Divider Styles */
+.divider-line-left { background: linear-gradient(to right, transparent, rgba(255, 107, 26, 0.3)); }
+.divider-line-right { background: linear-gradient(to left, transparent, rgba(255, 107, 26, 0.3)); }
+.dot-1 { background: #FF6B1A; box-shadow: 0 0 6px #FF6B1A; }
+.dot-2 { background: #FFD700; box-shadow: 0 0 6px #FFD700; }
+.dot-3 { background: #FF3CAC; box-shadow: 0 0 6px #FF3CAC; }
+
+.icon-container-map {
+  background: rgba(0, 229, 255, 0.08);
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.15);
+}
+
+.icon-map { color: #00E5FF; }
+
+.text-venue {
+  color: rgba(255, 255, 255, 0.85);
+  font-family: 'Poppins', sans-serif;
+}
+
+.text-address {
+  color: rgba(255, 255, 255, 0.35);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+}
+
+/* =========================================
+   INVITATION CARD STYLES
+   ========================================= */
+.card-invitation {
+  background: linear-gradient(145deg, #160A22 0%, #1C0A2E 100%);
+  border: 1px solid rgba(155, 93, 229, 0.25);
+  box-shadow: 0 0 0 1px rgba(155, 93, 229, 0.05), 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.card-invite-top-glow {
+  background: linear-gradient(to right, transparent, #9B5DE5, #FF3CAC, #9B5DE5, transparent);
+  opacity: 0.7;
+}
+
+.card-invite-center-glow {
+  background: radial-gradient(ellipse, rgba(155, 93, 229, 0.15) 0%, transparent 70%);
+  filter: blur(20px);
+}
+
+.text-decorative { filter: drop-shadow(0 0 6px #9B5DE5); }
+
+.text-label-invite {
+  color: #9B5DE5;
+  font-family: 'Poppins', sans-serif;
+  text-shadow: 0 0 12px rgba(155, 93, 229, 0.6);
+}
+
+.text-title-class {
+  font-family: 'Playfair Display', serif;
+  background: linear-gradient(135deg, #FF3CAC 0%, #9B5DE5 50%, #00E5FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 20px rgba(155, 93, 229, 0.4));
+}
+
