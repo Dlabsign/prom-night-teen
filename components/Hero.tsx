@@ -167,7 +167,7 @@ export default function Hero() {
                         marginBottom: "-3rem", // Memberi jarak dengan H1
                     }}
                 >
-                    ✦ <br /> A Night to Celebrate <br/>
+                    ✦ <br /> A Night to Celebrate <br />
                 </motion.p>
 
                 {/* Main title dengan Shimmer Variant */}
@@ -221,7 +221,7 @@ export default function Hero() {
                             fontSize: "clamp(0.7rem, 2vw, 0.875rem)",
                         }}
                     >
-                        Class of 2026
+                        Army Of God
                     </span>
                 </motion.div>
 
@@ -232,15 +232,14 @@ export default function Hero() {
                     animate="visible"
                     style={{
                         fontFamily: "'Playfair Display', serif",
-                        color: "rgba(100,100,100,0.6)",
+                        color: "rgba(196, 196, 196, 0.6)",
                         fontStyle: "italic",
                         fontWeight: 300,
                         fontSize: "clamp(1rem, 4vw, 1.125rem)",
-
                         lineHeight: 1.6,
                     }}
                 >
-                    ARMY OF GOD
+                    Scroll Down
                 </motion.p>
             </motion.div>
         </section>

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { CalendarDays, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react"; // Menghapus CalendarDays karena tidak dipakai di code
 
 // Variasi untuk animasi parent (Kartu Utama)
 const cardVariants: Variants = {
@@ -41,15 +41,15 @@ export function DateCard() {
             transition={{ duration: 0.3 }}
             className="card-date relative overflow-hidden"
             style={{
-                width: "100%",
-                maxWidth: "42rem",
+                // PENYESUAIAN: width dibuat menggunakan min() agar memberi jarak aman 16px di kiri-kanan pada layar HP
+                width: "min(calc(100vw - 32px), 42rem)",
                 margin: "0 auto clamp(2rem, 5vw, 4rem)",
                 borderRadius: "1rem",
-                padding: "clamp(1.5rem, 5vw, 3rem)",
+                // PENYESUAIAN: Padding kiri-kanan bisa sedikit lebih kecil di HP
+                padding: "clamp(2rem, 6vw, 3rem) clamp(1rem, 5vw, 3rem)",
                 textAlign: "center",
-                // Tambahan style border halus untuk mempertegas bentuk kartu
                 border: "1px solid rgba(255, 255, 255, 0.05)",
-                background: "rgba(10, 10, 10, 0.6)", // Opsional: Memberi kesan kaca/gelap
+                background: "rgba(10, 10, 10, 0.6)",
                 backdropFilter: "blur(12px)"
             }}
         >
@@ -59,31 +59,34 @@ export function DateCard() {
                 whileInView={{ scaleX: 1, opacity: 1 }}
                 transition={{ duration: 1.5, ease: "easeOut" }}
                 className="card-date-top-glow absolute top-0 left-0 right-0 h-px"
-                style={{ transformOrigin: "center" }}
+                style={{ transformOrigin: "center", background: "linear-gradient(to right, transparent, rgba(255,107,26,0.5), transparent)" }}
             />
             <motion.div
                 initial={{ scaleX: 0, opacity: 0 }}
                 whileInView={{ scaleX: 1, opacity: 1 }}
                 transition={{ duration: 1.5, ease: "easeOut" }}
                 className="card-date-bottom-glow absolute bottom-0 left-0 right-0 h-px"
-                style={{ transformOrigin: "center" }}
+                style={{ transformOrigin: "center", background: "linear-gradient(to right, transparent, rgba(155,93,229,0.5), transparent)" }}
             />
 
-            {/* Corner accent circles */}
-            <div className="card-date-circle-tl absolute top-0 left-0 w-32 h-32 rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-            <div className="card-date-circle-br absolute bottom-0 right-0 w-40 h-40 rounded-full translate-x-1/3 translate-y-1/3 pointer-events-none" />
+            {/* Corner accent circles - PENYESUAIAN: Ukuran dibuat fluid mengikuti layar menggunakan clamp() */}
+            <div
+                className="card-date-circle-tl absolute top-0 left-0 rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none bg-orange-500/10 blur-2xl"
+                style={{ width: "clamp(6rem, 25vw, 8rem)", height: "clamp(6rem, 25vw, 8rem)" }}
+            />
+            <div
+                className="card-date-circle-br absolute bottom-0 right-0 rounded-full translate-x-1/3 translate-y-1/3 pointer-events-none bg-purple-500/10 blur-2xl"
+                style={{ width: "clamp(8rem, 30vw, 10rem)", height: "clamp(8rem, 30vw, 10rem)" }}
+            />
 
             <div className="relative z-10">
-                {/* Calendar icon - Animasi Floating */}
-
-
-                {/* Title Save The Date dengan Gradien Emas/Oranye */}
+                {/* Title Save The Date */}
                 <motion.h2
                     variants={childVariants}
                     className="text-title-date font-semibold"
                     style={{
                         marginBottom: "1rem",
-                        fontSize: "clamp(1.5rem, 4vw, 2rem)",
+                        fontSize: "clamp(1.75rem, 6vw, 2.5rem)", // Disedikit besarkan agar lebih stand-out
                         fontStyle: "italic",
                         background: "linear-gradient(135deg, #FFD700 0%, #FF6B1A 100%)",
                         WebkitBackgroundClip: "text",
@@ -98,7 +101,7 @@ export function DateCard() {
                 <motion.p
                     variants={childVariants}
                     className="text-date font-medium"
-                    style={{ marginBottom: "0.5rem", fontSize: "clamp(1.125rem, 3vw, 1.5rem)", color: "#ffffff" }}
+                    style={{ marginBottom: "0.5rem", fontSize: "clamp(1.125rem, 4vw, 1.5rem)", color: "#ffffff" }}
                 >
                     Friday, 22 May 2026
                 </motion.p>
@@ -107,23 +110,23 @@ export function DateCard() {
                 <motion.p
                     variants={childVariants}
                     className="text-time uppercase"
-                    style={{ marginBottom: "2rem", letterSpacing: "0.22em", fontSize: "clamp(0.75rem, 2vw, 0.875rem)", color: "rgba(255,255,255,0.7)" }}
+                    style={{ marginBottom: "2rem", letterSpacing: "0.22em", fontSize: "clamp(0.75rem, 2.5vw, 0.875rem)", color: "rgba(255,255,255,0.7)" }}
                 >
                     07:00 PM — Till Drop
                 </motion.p>
 
                 {/* Divider Line dengan Animasi */}
-                <motion.div variants={childVariants} style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "2rem", width: "100%" }}>
+                <motion.div variants={childVariants} style={{ display: "flex", alignItems: "center", gap: "clamp(0.5rem, 2vw, 1rem)", marginBottom: "2rem", width: "100%" }}>
                     <div className="flex-1 flex justify-end">
-                        <motion.div variants={lineVariants} className="divider-line-left h-px w-full max-w-[150px] bg-gradient-to-r from-transparent to-orange-500/50" />
+                        <motion.div variants={lineVariants} className="h-px w-full max-w-[150px] bg-gradient-to-r from-transparent to-orange-500/50" />
                     </div>
                     <div style={{ display: "flex", gap: "0.375rem" }}>
-                        <motion.div animate={{ opacity: [0.3, 1, 0.3] }} transition={{ repeat: Infinity, duration: 2, delay: 0 }} className="dot-1 w-1.5 h-1.5 rounded-full bg-orange-400" />
-                        <motion.div animate={{ opacity: [0.3, 1, 0.3] }} transition={{ repeat: Infinity, duration: 2, delay: 0.3 }} className="dot-2 w-1.5 h-1.5 rounded-full bg-pink-500" />
-                        <motion.div animate={{ opacity: [0.3, 1, 0.3] }} transition={{ repeat: Infinity, duration: 2, delay: 0.6 }} className="dot-3 w-1.5 h-1.5 rounded-full bg-purple-500" />
+                        <motion.div animate={{ opacity: [0.3, 1, 0.3] }} transition={{ repeat: Infinity, duration: 2, delay: 0 }} className="w-1.5 h-1.5 rounded-full bg-orange-400" />
+                        <motion.div animate={{ opacity: [0.3, 1, 0.3] }} transition={{ repeat: Infinity, duration: 2, delay: 0.3 }} className="w-1.5 h-1.5 rounded-full bg-pink-500" />
+                        <motion.div animate={{ opacity: [0.3, 1, 0.3] }} transition={{ repeat: Infinity, duration: 2, delay: 0.6 }} className="w-1.5 h-1.5 rounded-full bg-purple-500" />
                     </div>
                     <div className="flex-1 flex justify-start">
-                        <motion.div variants={lineVariants} className="divider-line-right h-px w-full max-w-[150px] bg-gradient-to-l from-transparent to-purple-500/50" />
+                        <motion.div variants={lineVariants} className="h-px w-full max-w-[150px] bg-gradient-to-l from-transparent to-purple-500/50" />
                     </div>
                 </motion.div>
 
@@ -132,20 +135,19 @@ export function DateCard() {
                     <motion.div
                         animate={{ y: [-3, 3, -3] }}
                         transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 1 }}
-                        className="icon-container-map flex items-center justify-center relative"
+                        className="flex items-center justify-center relative"
                         style={{ width: "3rem", height: "3rem", borderRadius: "0.75rem" }}
                     >
-                        {/* Efek glow di balik icon */}
                         <div className="absolute inset-0 rounded-xl bg-purple-500/20 blur-md pointer-events-none" />
-                        <MapPin size={22} className="icon-map relative z-10" strokeWidth={1.3} color="#9B5DE5" />
+                        <MapPin size={24} className="relative z-10" strokeWidth={1.5} color="#9B5DE5" />
                     </motion.div>
                 </motion.div>
 
                 {/* Venue Name */}
                 <motion.p
                     variants={childVariants}
-                    className="text-venue font-medium"
-                    style={{ marginBottom: "0.5rem", fontSize: "clamp(1rem, 2.5vw, 1.125rem)", color: "#ffffff" }}
+                    className="font-medium"
+                    style={{ marginBottom: "0.5rem", fontSize: "clamp(1rem, 3vw, 1.25rem)", color: "#ffffff" }}
                 >
                     GMS Sidoarjo
                 </motion.p>
@@ -153,10 +155,9 @@ export function DateCard() {
                 {/* Venue Address */}
                 <motion.p
                     variants={childVariants}
-                    className="text-address"
-                    style={{ fontSize: "clamp(0.75rem, 2vw, 0.875rem)", lineHeight: 1.5, color: "rgba(255,255,255,0.6)" }}
+                    style={{ fontSize: "clamp(0.8rem, 2.5vw, 0.875rem)", lineHeight: 1.6, color: "rgba(255,255,255,0.6)" }}
                 >
-                    Ruko Taman Pinang Indah, Kav. A2, No. 27 - 32, Sidoarjo
+                    Ruko Taman Pinang Indah, <br />Kav. A2, No. 27 - 32, Sidoarjo
                 </motion.p>
             </div>
         </motion.div>
