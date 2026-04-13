@@ -75,18 +75,7 @@ export function DateCard() {
 
             <div className="relative z-10">
                 {/* Calendar icon - Animasi Floating */}
-                <motion.div variants={childVariants} style={{ display: "flex", justifyContent: "center", marginBottom: "1.5rem" }}>
-                    <motion.div
-                        animate={{ y: [-3, 3, -3] }}
-                        transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                        className="icon-container-calendar flex items-center justify-center relative"
-                        style={{ width: "3.5rem", height: "3.5rem", borderRadius: "0.75rem" }}
-                    >
-                        {/* Efek glow di balik icon */}
-                        <div className="absolute inset-0 rounded-xl bg-orange-500/20 blur-md pointer-events-none" />
-                        <CalendarDays size={28} className="icon-calendar relative z-10" strokeWidth={1.3} color="#FF6B1A" />
-                    </motion.div>
-                </motion.div>
+
 
                 {/* Title Save The Date dengan Gradien Emas/Oranye */}
                 <motion.h2
