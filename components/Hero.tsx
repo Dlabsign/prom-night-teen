@@ -167,7 +167,7 @@ export default function Hero() {
                         marginBottom: "-3rem", // Memberi jarak dengan H1
                     }}
                 >
-                    ✦ <br /> A Night to Celebrate <br/>✦
+                    ✦ <br /> A Night to Celebrate <br/>
                 </motion.p>
 
                 {/* Main title dengan Shimmer Variant */}

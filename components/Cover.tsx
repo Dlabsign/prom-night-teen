@@ -155,8 +155,8 @@ export default function Cover({ onOpen }: CoverProps) {
                         fontWeight: 500,
                         textTransform: "uppercase",
                         letterSpacing: "0.35em",
-                        fontSize: "clamp(0.8rem, 3vw, 1.5rem)", // Teks mengecil di HP
-                        marginBottom: "0px",
+                        fontSize: "clamp(1.3rem, 3vw, 1.5rem)", // Teks mengecil di HP
+                        marginBottom: "-1.2rem",
                     }}
                 >
                     Hai AOG'ers
@@ -176,13 +176,7 @@ export default function Cover({ onOpen }: CoverProps) {
                         marginBottom: "8px",
                     }}
                 >
-                    <span style={{ fontSize: "clamp(2rem, 5vw, 2rem)", marginRight: "12px" }}>
-                        ✦
-                    </span>
                     You Are Invited
-                    <span style={{ fontSize: "clamp(2rem, 5vw, 2rem)", marginLeft: "12px" }}>
-                        ✦
-                    </span>
                 </h1>
 
 
