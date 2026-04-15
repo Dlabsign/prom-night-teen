@@ -105,7 +105,7 @@ export default function QuestionCard({ onAnswer }: QuestionCardProps) {
 
                 <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
                     <button
-                        onClick={() => onAnswer(true)}
+                        onClick={() => onAnswer(false)}
                         style={{ padding: "12px clamp(24px, 6vw, 36px)", background: "linear-gradient(135deg, #FF6B1A, #FF3CAC)", border: "none", borderRadius: "100px", color: "white", fontFamily: "'Poppins', sans-serif", fontSize: "14px", fontWeight: 500, cursor: "pointer", boxShadow: "0 0 20px rgba(255,107,26,0.4), 0 0 40px rgba(255,60,172,0.2), 0 4px 15px rgba(0,0,0,0.3)", transition: "transform 0.2s ease, box-shadow 0.2s ease", flex: "1 1 auto", maxWidth: "180px" }}
                         onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.transform = "scale(1.05)"}
                         onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.transform = "scale(1)"}
@@ -113,7 +113,7 @@ export default function QuestionCard({ onAnswer }: QuestionCardProps) {
                         Yes
                     </button>
                     <button
-                        onClick={() => onAnswer(false)}
+                        onClick={() => onAnswer(true)}
                         style={{ padding: "12px clamp(24px, 6vw, 36px)", background: "transparent", border: "1px solid rgba(255,107,26,0.5)", borderRadius: "100px", color: "#FF6B1A", fontFamily: "'Poppins', sans-serif", fontSize: "14px", fontWeight: 500, cursor: "pointer", boxShadow: "0 0 12px rgba(255,107,26,0.1), inset 0 0 12px rgba(255,107,26,0.03)", transition: "transform 0.2s ease, background 0.2s ease, color 0.2s ease", flex: "1 1 auto", maxWidth: "180px" }}
                         onMouseEnter={(e) => { const btn = e.currentTarget as HTMLButtonElement; btn.style.background = "rgba(255,107,26,0.12)"; btn.style.transform = "scale(1.05)"; }}
                         onMouseLeave={(e) => { const btn = e.currentTarget as HTMLButtonElement; btn.style.background = "transparent"; btn.style.transform = "scale(1)"; }}

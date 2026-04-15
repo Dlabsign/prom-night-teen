@@ -9,7 +9,7 @@ interface EnjoyCardProps {
 export default function EnjoyCard({ isYes }: EnjoyCardProps) {
   const fadeVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+    visible: { opacity: 1, y: 0, transition: { duration: 3, ease: "easeOut" } },
     exit: { opacity: 0, y: -20, transition: { duration: 0.5 } },
   };
 
@@ -79,7 +79,7 @@ export default function EnjoyCard({ isYes }: EnjoyCardProps) {
       {/* Main content */}
       <div style={{ position: "relative", zIndex: 1 }}>
         {/* Pre-label */}
-        
+
 
         {/* Main heading */}
         <motion.h1
@@ -104,6 +104,7 @@ export default function EnjoyCard({ isYes }: EnjoyCardProps) {
           }}
         >
           Welcome To The...
+         
         </motion.h1>
 
         {/* Glowing dots row */}
