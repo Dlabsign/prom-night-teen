@@ -87,9 +87,15 @@ export default function FormCard({ isYes, formData, onChange, onSubmit, isLoadin
                     {/* TAMBAHAN Input: Email */}
                     <div style={{ display: "flex", alignItems: "center", gap: "12px", margin: "4px 0" }}>
                         <div style={{ flex: 1, height: "1px", background: "linear-gradient(to right, transparent, rgba(255,107,26,0.25))" }} />
-                        <span style={{ fontSize: "10px", letterSpacing: "0.2em", color: "rgba(255,255,255,0.3)", fontFamily: "'Poppins', sans-serif", textTransform: "uppercase" }}>Undangan Akan dikirim melalui Gmail</span>
+                        <span style={{ fontSize: ".70rem", letterSpacing: "0.2em", color: "rgba(252, 26, 26, 0.93)", fontFamily: "'Poppins', sans-serif", textTransform: "uppercase", textAlign: "center"}}>Invitation Akan dikirim Melalui GMAIL. <br />Pastikan email & data kamu benar</span>
                         <div style={{ flex: 1, height: "1px", background: "linear-gradient(to left, transparent, rgba(255,107,26,0.25))" }} />
                     </div>
+                    <div style={{ display: "flex", alignItems: "center", gap: "12px", margin: "4px 0" }}>
+                        <div style={{ flex: 1, height: "1px", background: "linear-gradient(to right, transparent, rgba(255,107,26,0.25))" }} />
+                        <span style={{ fontSize: ".70rem", letterSpacing: "0.2em", color: "rgba(252, 26, 26, 0.93)", fontFamily: "'Poppins', sans-serif", textTransform: "uppercase", textAlign: "center"}}>Pengisian Email hanya bisa dilakukan 1x.</span>
+                        <div style={{ flex: 1, height: "1px", background: "linear-gradient(to left, transparent, rgba(255,107,26,0.25))" }} />
+                    </div>
+                    
                     <input required type="email" name="email" placeholder="Pastikan Alamat Email Kamu Benar!" value={formData.email} onChange={onChange} style={{ padding: "13px 16px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "10px", color: "white", fontFamily: "'Poppins', sans-serif", fontSize: "14px", outline: "none", transition: "border-color 0.25s ease, box-shadow 0.25s ease", width: "100%" }} onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(255,107,26,0.6)"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(255,107,26,0.1)"; }} onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)"; e.currentTarget.style.boxShadow = "none"; }} />
 
                     {isYes === false && (
