@@ -13,7 +13,7 @@ import FormCard from "@/components/FormCard";
 import EnjoyCard from "@/components/EnjoyCard";
 import QuestionCard from "@/components/PertanyaanCard";
 
-// TAMBAHAN: Import collection, query, where, dan getDocs untuk mengecek database
+// Import Firebase
 import { doc, setDoc, serverTimestamp, collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
@@ -46,59 +46,79 @@ export default function Home() {
   // Event Handlers
   const handleOpenInvitation = () => { setStep("question"); setIsPlaying(true); };
   const handleAnswer = (answer: boolean) => { setIsYes(answer); setStep("form"); };
-  const handleInputChange = (e: any) => setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  // PERBAIKAN: Mengganti tipe 'any' menjadi tipe bawaan React agar lebih aman (Typescript best practice)
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    
-    try {
-      // --- 1. CEK EMAIL DI DATABASE ---
-      // Membuat query untuk mencari apakah ada dokumen dengan email yang sama
-      const q = query(
-        collection(db, "rsvp_responses"), 
-        where("email", "==", formData.email)
-      );
-      
-      // Menjalankan pencarian
-      const querySnapshot = await getDocs(q);
 
-      // Jika hasilnya tidak kosong (!empty), berarti email sudah pernah dipakai
-      if (!querySnapshot.empty) {
-        alert("Email ini telah digunakan sebelumnya. Silahkan gunakan email lain untuk RSVP.");
-        setIsLoading(false);
-        return; // MENGHENTIKAN PROSES DI SINI, data tidak akan tersimpan/terkirim
+    try {
+      // --- 1. CEK EMAIL DI FIREBASE DENGAN ERROR HANDLING JARINGAN ---
+      let querySnapshot;
+      try {
+        const q = query(
+          collection(db, "rsvp_responses"),
+          where("email", "==", formData.email)
+        );
+        querySnapshot = await getDocs(q);
+      } catch (networkError: any) {
+        // Menangkap error khusus jika internet mati atau akses ke Firestore diblokir
+        if (networkError.message?.includes("10 seconds") || networkError.message?.includes("offline")) {
+          alert("Gagal terhubung ke database. Pastikan koneksi internet stabil dan matikan AdBlocker/VPN, lalu coba lagi.");
+          setIsLoading(false);
+          return;
+        }
+        throw networkError; // Lempar error lain ke blok catch utama di bawah
       }
 
-      // --- 2. JIKA EMAIL AMAN (BELUM ADA), LANJUT SIMPAN ---
+      if (!querySnapshot.empty) {
+        alert("Email ini sudah digunakan untuk RSVP sebelumnya. Silakan gunakan email lain.");
+        setIsLoading(false);
+        return;
+      }
+
+      // --- 2. SIMPAN KE FIREBASE ---
       const customId = `${formData.nama.toLowerCase().replace(/\s+/g, '_')}_${formData.cg.toLowerCase().replace(/\s+/g, '_')}_${Date.now()}`;
-      
       await setDoc(doc(db, "rsvp_responses", customId), {
         ...formData,
         is_staying: isYes,
         created_at: serverTimestamp(),
       });
 
-      // --- 3. KIRIM EMAIL OTOMATIS VIA API ---
-      // (Pastikan kamu memanggil API yang sudah kita buat sebelumnya)
+      // --- 3. KIRIM KE GOOGLE SHEETS (VIA APPS SCRIPT) ---
+      const sheetUrl = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_URL;
+      if (sheetUrl) {
+        fetch(sheetUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8',
+          },
+          body: JSON.stringify({
+            ...formData,
+            isYes: isYes
+          }),
+          mode: 'no-cors'
+        }).catch(err => console.error("Gagal kirim ke Sheets:", err));
+      }
+
+      // --- 4. KIRIM EMAIL OTOMATIS VIA API ---
       await fetch('/api/sendEmail', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...formData,
-          isYes: isYes
-        }),
-      });
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, isYes: isYes }),
+      }).catch(err => console.error("Gagal mengirim email:", err));
 
-      // --- 4. TRANSISI HALAMAN SUKSES ---
+      // --- 5. TRANSISI HALAMAN SUKSES ---
       setStep("enjoy");
       setTimeout(() => setStep("main"), 3000);
-      
-    } catch (error) {
+
+    } catch (error: any) {
       console.error(error);
-      alert("Terjadi kesalahan saat menyimpan atau mengirim data. Silakan coba lagi.");
+      alert("Terjadi kesalahan sistem. Silakan coba lagi.");
     } finally {
       setIsLoading(false);
     }
