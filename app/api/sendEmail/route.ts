@@ -13,7 +13,7 @@ export async function POST(request: Request) {
         const gradientHeader = isYes
             ? "linear-gradient(135deg, #FF6B1A, #FF3CAC)"
             : "linear-gradient(135deg, #00E5FF, #3B82F6)";
-        const statusText = isYes ? `Halo, ${nama}!` : `Halo, ${nama}!`;
+        const statusText = isYes ? `Hi, ${nama}!` : `Hi, ${nama}!`;
 
         const transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -34,7 +34,7 @@ export async function POST(request: Request) {
           </div>
 
           <div style="padding: 30px; color: #e0e0e0; position: relative; z-index: 1;">
-            <p style="font-size: 14px; margin-bottom: 24px;">Silahkan tunjukkan undangan berikut pada front-desk</p>
+            <p style="font-size: 14px; margin-bottom: 24px;">Silakan tunjukkan email berikut saat memasuki gereja</p>
             
             <div style="background: rgba(255,255,255,0.03); padding: 20px; border-radius: 12px; margin: 24px 0; text-align: left; border-left: 4px solid ${themeColor};">
               <h2 style="margin: 5px 0; font-size: 16px; font-weight: 400;">Asal CG: <b style="font-weight: 600;">${cg}</b></h2>
@@ -43,7 +43,7 @@ export async function POST(request: Request) {
               ${!isYes ? `<h2 style="margin: 8px 0 5px 0; font-size: 16px; font-weight: 400;">Sudah ada CG?: <b style="font-weight: 600;">${adaCgDisana}</b></h2>` : ""}
             </div>
 
-            <h2 style="color: ${themeColor}; font-weight: 600; font-size: 18px; margin-bottom: 5px;">Jumat, 22 Mei 2026 | 07:00 PM</h2>
+            <h2 style="color: ${themeColor}; font-weight: 600; font-size: 18px; margin-bottom: 5px;">Jumat, 22 Mei 2026 | 18:30</h2>
             <h2 style="font-size: 14px; font-weight: 400; opacity: 0.8; margin-top: 0;">GMS Sidoarjo</h2>
           </div>
 

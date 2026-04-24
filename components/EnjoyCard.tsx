@@ -103,7 +103,7 @@ export default function EnjoyCard({ isYes }: EnjoyCardProps) {
               : "drop-shadow(0 0 30px rgba(59,130,246,0.4))",
           }}
         >
-          Welcome To The...
+          Welcome To...
          
         </motion.h1>
 

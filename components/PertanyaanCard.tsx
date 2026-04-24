@@ -100,7 +100,7 @@ export default function QuestionCard({ onAnswer }: QuestionCardProps) {
                 </p>
 
                 <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(22px, 6vw, 28px)", fontWeight: 600, marginBottom: "32px", lineHeight: 1.4, background: "linear-gradient(135deg, #FFD700 0%, #FF6B1A 50%, #FF3CAC 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", filter: "drop-shadow(0 0 12px rgba(255,107,26,0.25))" }}>
-                    Are you Graduate?
+                    are you a graduate?
                 </h2>
 
                 <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>

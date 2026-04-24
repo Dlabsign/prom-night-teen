@@ -159,7 +159,7 @@ export default function Cover({ onOpen }: CoverProps) {
                         marginBottom: "-1.2rem",
                     }}
                 >
-                    Hai AOG'ers
+                    Hi AOG'ers
                 </p>
 
                 {/* Cover title (Menggunakan CLAMP untuk responsive font) */}
