@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image"; // PERBAIKAN: Import komponen Image Next.js
 import FloralDecoration from "./Floraldecoration";
 import PapelPicadoDivider from "./Papelpicadodivider";
-import { CalendarDays, MapPin } from "lucide-react";
 
 interface StarDot {
     id: number;
@@ -20,25 +20,6 @@ interface StarDot {
 const fadeInUp = {
     hidden: { opacity: 0, y: 40 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: "easeOut" as const } },
-};
-
-// Varian khusus untuk animasi teks berkilau
-const shimmerVariant = {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        backgroundPosition: ["0% center", "200% center"] as [string, string],
-        transition: {
-            opacity: { duration: 0.9, ease: "easeOut" as const },
-            y: { duration: 0.9, ease: "easeOut" as const },
-            backgroundPosition: {
-                repeat: Infinity,
-                duration: 4,
-                ease: "linear" as const,
-            },
-        },
-    },
 };
 
 export default function Hero() {
@@ -86,30 +67,9 @@ export default function Hero() {
                 justifyContent: "center",
             }}
         >
-            {/* --- POSISI FLORAL RESPONSIVE --- */}
             {/* --- POSISI FLORAL DI KEEMPAT SUDUT --- */}
-            <motion.div
-                style={{ position: "absolute", right: 0, top: 0, pointerEvents: "none", zIndex: 0, opacity: 0.9 }}
-            >
-                <FloralDecoration position="top-right" size={floralSize} />
-            </motion.div>
-            <motion.div
-                style={{ position: "absolute", left: 0, top: 0, pointerEvents: "none", zIndex: 0, opacity: 0.9 }}
-            >
-                <FloralDecoration position="top-left" size={floralSize} />
-            </motion.div>
-            <motion.div
-                style={{ position: "absolute", left: 0, bottom: 0, pointerEvents: "none", zIndex: 0, opacity: 0.9 }}
-            >
-                <FloralDecoration position="bottom-left" size={floralSize} />
-            </motion.div>
-            <motion.div
-                style={{ position: "absolute", right: 0, bottom: 0, pointerEvents: "none", zIndex: 0, opacity: 0.9 }}
-            >
-                <FloralDecoration position="bottom-right" size={floralSize} />
-            </motion.div>
+          
             {/* ------------------------------------------- */}
-
 
             {/* Ambient glow blobs */}
             <div
@@ -140,11 +100,31 @@ export default function Hero() {
                 }}
             />
 
+            {/* Star field dots */}
+            {dots.map((dot) => (
+                <motion.div
+                    key={dot.id}
+                    className="absolute rounded-full pointer-events-none"
+                    style={{
+                        width: dot.width,
+                        height: dot.height,
+                        left: dot.left,
+                        top: dot.top,
+                        background: dot.color,
+                        boxShadow: `0 0 10px ${dot.color}`,
+                    }}
+                    animate={{ opacity: [0.5, 1, 0.5] }}
+                    transition={{ repeat: Infinity, duration: dot.duration, delay: dot.delay }}
+                />
+            ))}
+
             {/* Konten Utama */}
             <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.9 }}
+                initial="hidden"
+                animate="visible"
+                variants={{
+                    visible: { transition: { staggerChildren: 0.15 } },
+                }}
                 style={{
                     position: "relative",
                     zIndex: 10,
@@ -153,8 +133,8 @@ export default function Hero() {
                     alignItems: "center"
                 }}
             >
-                {/* Top label - DIPISAHKAN DARI H1 */}
-                <motion.p
+                {/* Top label */}
+                {/* <motion.p
                     variants={fadeInUp}
                     style={{
                         color: "#FF6B1A",
@@ -164,72 +144,42 @@ export default function Hero() {
                         textTransform: "uppercase",
                         letterSpacing: "0.35em",
                         fontSize: "clamp(1rem, 3vw, 1.5rem)",
-                        marginBottom: "-3rem", // Memberi jarak dengan H1
+                        marginBottom: "1.5rem", 
                     }}
                 >
                     ✦ <br /> A Night to Celebrate <br />
-                </motion.p>
+                </motion.p> */}
 
-                {/* Main title dengan Shimmer Variant */}
-                <motion.h1
-                    variants={shimmerVariant}
-                    initial="hidden"
-                    animate="visible"
-                    style={{
-                        fontFamily: "'Playfair Display', serif",
-                        fontWeight: 600,
-                        // Gradien diubah agar memiliki titik kilauan putih/emas terang di tengah dan looping seamless
-                        background: "linear-gradient(90deg, #FFD700 0%, #FF6B1A 25%, #FF3CAC 40%, #FFFFFF 50%, #FF3CAC 60%, #FF6B1A 75%, #FFD700 100%)",
-                        backgroundSize: "200% auto", // Harus lebih besar agar kilauan bisa bergerak
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                        backgroundClip: "text",
-                        filter: "drop-shadow(0 0 30px rgba(255,107,26,0.35))",
-                        fontSize: "clamp(5.3rem, 10vw, 6.5rem)",
-                        marginBottom: "8px",
-                        fontStyle: "italic",
-                    }}
-                >
-                    Prom Night
-                </motion.h1>
-
-                {/* Year badge */}
+                {/* PERBAIKAN: Title diubah menjadi Gambar Responsive */}
                 <motion.div
                     variants={fadeInUp}
-                    initial="hidden"
-                    animate="visible"
                     style={{
+                        position: "relative",
+                        width: "100%",
+                        // maxWidth akan menahan ukuran logo maksimal 600px di laptop, dan minimal 250px di HP
+                        maxWidth: "clamp(250px, 60vw, 600px)",
+                        marginBottom: "16px",
                         display: "flex",
                         justifyContent: "center",
-                        marginTop: "8px",
-
                     }}
                 >
-                    <span
+                    <Image
+                        src="/logo.png"
+                        alt="Prom Night Logo"
+                        width={550}
+                        height={250}
+                        priority // Flag Next.js agar gambar hero diload paling pertama (LCP)
                         style={{
-                            border: "1px solid rgba(255,215,0,0.4)",
-                            color: "#FFD700",
-                            background: "rgba(255,215,0,0.05)",
-                            boxShadow: "0 0 20px rgba(255,215,0,0.15), inset 0 0 10px rgba(255,215,0,0.05)",
-                            fontFamily: "'Poppins', sans-serif",
-                            textShadow: "0 0 10px rgba(255,215,0,0.5)",
-                            fontWeight: 500,
-                            textTransform: "uppercase",
-                            letterSpacing: "0.2em",
-                            padding: "0.375rem 1.5rem",
-                            borderRadius: "9999px",
-                            fontSize: "clamp(0.7rem, 2vw, 0.875rem)",
+                            width: "90%",
+                            height: "auto", // Menjaga proporsi gambar tidak gepeng
+                            objectFit: "contain",
+                            filter: "drop-shadow(0 0 20px rgba(255,107,26,0.35))", // Efek kilau tetap ada di belakang logo
                         }}
-                    >
-                        Army Of God
-                    </span>
+                    />
                 </motion.div>
 
-                {/* Subtitle */}
                 <motion.p
                     variants={fadeInUp}
-                    initial="hidden"
-                    animate="visible"
                     style={{
                         fontFamily: "'Playfair Display', serif",
                         color: "rgba(196, 196, 196, 0.6)",

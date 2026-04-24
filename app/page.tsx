@@ -16,6 +16,7 @@ import QuestionCard from "@/components/PertanyaanCard";
 // Import Firebase
 import { doc, setDoc, serverTimestamp, collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import FloralDecoration from "@/components/Floraldecoration";
 
 type FlowStep = "cover" | "question" | "form" | "enjoy" | "main";
 
@@ -31,6 +32,11 @@ export default function Home() {
     adaCgDisana: "Tidak",
   });
 
+
+  // STATE UNTUK RESPONSIVE BUNGA
+  const [floralSize, setFloralSize] = useState(280);
+
+
   // Audio Logic
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -41,6 +47,15 @@ export default function Home() {
     } else if (audioRef.current) {
       audioRef.current.pause();
     }
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setFloralSize(140);
+      } else {
+        setFloralSize(280);
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
   }, [isPlaying]);
 
   // Event Handlers
@@ -125,8 +140,30 @@ export default function Home() {
   };
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden bg-[#0A0A0F]">
-      <audio ref={audioRef} src="/music2.mp3" loop preload="auto" />
+    <main className="relative min-h-screen overflow-x-hidden bg-[url('/bg.jpg')] bg-cover bg-center bg-no-repeat bg-fixed">
+            <audio ref={audioRef} src="/music2.mp3" loop preload="auto" />
+
+      {/* --- POSISI FLORAL DI KEEMPAT SUDUT --- */}
+      {/* <motion.div
+        style={{ position: "absolute", right: 0, top: 0, pointerEvents: "none", zIndex: 0, opacity: 0.9 }}
+      >
+        <FloralDecoration position="top-right" size={floralSize} />
+      </motion.div>
+      <motion.div
+        style={{ position: "absolute", left: 0, top: 0, pointerEvents: "none", zIndex: 0, opacity: 0.9 }}
+      >
+        <FloralDecoration position="top-left" size={floralSize} />
+      </motion.div>
+      <motion.div
+        style={{ position: "absolute", left: 0, bottom: 0, pointerEvents: "none", zIndex: 0, opacity: 0.9 }}
+      >
+        <FloralDecoration position="bottom-left" size={floralSize} />
+      </motion.div>
+      <motion.div
+        style={{ position: "absolute", right: 0, bottom: 0, pointerEvents: "none", zIndex: 0, opacity: 0.9 }}
+      >
+        <FloralDecoration position="bottom-right" size={floralSize} />
+      </motion.div> */}
 
       <AnimatePresence mode="wait">
         {step === "cover" && <Cover key="cover" onOpen={handleOpenInvitation} />}

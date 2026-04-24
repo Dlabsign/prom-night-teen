@@ -94,7 +94,7 @@ export default function EnjoyCard({ isYes }: EnjoyCardProps) {
             lineHeight: 1.1,
             background: isYes
               ? "linear-gradient(135deg, #FFD700 0%, #FF6B1A 50%, #FF3CAC 100%)"
-              : "linear-gradient(135deg, #00E5FF 0%, #3B82F6 50%, #9B5DE5 100%)",
+              : "linear-gradient(135deg, #fff 0%, #fff 50%, #fff 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
@@ -103,7 +103,7 @@ export default function EnjoyCard({ isYes }: EnjoyCardProps) {
               : "drop-shadow(0 0 30px rgba(59,130,246,0.4))",
           }}
         >
-          Welcome To The...
+          Welcome To...
          
         </motion.h1>
 

@@ -112,7 +112,7 @@ export function DateCard() {
                     className="text-time uppercase"
                     style={{ marginBottom: "2rem", letterSpacing: "0.22em", fontSize: "clamp(0.75rem, 2.5vw, 0.875rem)", color: "rgba(255,255,255,0.7)" }}
                 >
-                    07:00 PM — Till Drop
+                    18:30 WIB
                 </motion.p>
 
                 {/* Divider Line dengan Animasi */}

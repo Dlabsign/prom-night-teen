@@ -77,7 +77,6 @@ export default function Cover({ onOpen }: CoverProps) {
                 textAlign: "center",
                 padding: "0 24px",
                 overflow: "hidden",
-                backgroundColor: "#0a0a0a" // Warna background dasar (soft cream)
             }}
         >
             {/* Background ambient glows */}
@@ -92,26 +91,7 @@ export default function Cover({ onOpen }: CoverProps) {
             />
 
             {/* --- POSISI FLORAL DI KEEMPAT SUDUT --- */}
-            <motion.div
-                style={{ position: "absolute", right: 0, top: 0, pointerEvents: "none", zIndex: 0, opacity: 0.9 }}
-            >
-                <FloralDecoration position="top-right" size={floralSize} />
-            </motion.div>
-            <motion.div
-                style={{ position: "absolute", left: 0, top: 0, pointerEvents: "none", zIndex: 0, opacity: 0.9 }}
-            >
-                <FloralDecoration position="top-left" size={floralSize} />
-            </motion.div>
-            <motion.div
-                style={{ position: "absolute", left: 0, bottom: 0, pointerEvents: "none", zIndex: 0, opacity: 0.9 }}
-            >
-                <FloralDecoration position="bottom-left" size={floralSize} />
-            </motion.div>
-            <motion.div
-                style={{ position: "absolute", right: 0, bottom: 0, pointerEvents: "none", zIndex: 0, opacity: 0.9 }}
-            >
-                <FloralDecoration position="bottom-right" size={floralSize} />
-            </motion.div>
+           
 
             {/* Star field dots */}
             {dots.map((dot) => (
@@ -149,9 +129,9 @@ export default function Cover({ onOpen }: CoverProps) {
                 {/* Top label (Menggunakan CLAMP untuk responsive font) */}
                 <p
                     style={{
-                        color: "#FF6B1A",
+                        color: "#ffffff",
                         fontFamily: "'Poppins', sans-serif",
-                        textShadow: "0 0 20px rgba(255,107,26,0.7)",
+                        textShadow: "0 0 20px rgba(255, 255, 255, 0.7)",
                         fontWeight: 500,
                         textTransform: "uppercase",
                         letterSpacing: "0.35em",
@@ -159,7 +139,7 @@ export default function Cover({ onOpen }: CoverProps) {
                         marginBottom: "-1.2rem",
                     }}
                 >
-                    Hai AOG'ers
+                    Hi AOG'ers
                 </p>
 
                 {/* Cover title (Menggunakan CLAMP untuk responsive font) */}
